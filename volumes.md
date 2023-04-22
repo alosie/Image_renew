@@ -1,9 +1,10 @@
 # Docker Volumes
 
-## Problem Statement
+## Problem Statement   @8:00
 
 It is a very common requirement to persist the data in a Docker container beyond the lifetime of the container. However, the file system
-of a Docker container is deleted/removed when the container dies. 
+of a Docker container is deleted/removed when the container dies. Container are lightweight in nature and shortlived - ephemeral. If a logfile is deleted when it is shortlived, (remembe, when all resources are freed up, logfiles will be deleted), then organisation will no longer be able to access user information (for tracking or auditing purposes etc) that authenticated the container. 
+- no 2 problem is 
 
 ## Solution
 
@@ -41,7 +42,7 @@ inside the container will be persisted in the volume on the host file system.
 
 Bind mounts also aims to solve the same problem but in a complete different way.
 
-Using this way, user can mount a directory from the host file system into a container. Bind mounts have the same behavior as volumes, but
+Using this way, user can bind and mount a directory from the host file system into a container. Bind mounts have the same behavior as volumes, but
 are specified using a host path instead of a volume name. 
 
 For example, 
@@ -53,7 +54,7 @@ docker run -it -v <host_path>:<container_path> <image_name> /bin/bash
 ## Key Differences between Volumes and Bind Directory on a host as a Mount
 
 Volumes are managed, created, mounted and deleted using the Docker API. However, Volumes are more flexible than bind mounts, as 
-they can be managed and backed up separately from the host file system, and can be moved between containers and hosts.
+they can be managed and backed up separately from the host file system, and can be moved between containers and hosts. Can be moved to external sources as backup devices. Volumes can be created for high performance (high I/o) storage.  
 
 In a nutshell, Bind Directory on a host as a Mount are appropriate for simple use cases where you need to mount a directory from the host file system into
 a container, while volumes are better suited for more complex use cases where you need more control over the data being persisted
